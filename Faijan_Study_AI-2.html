@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102747">
+<title>Faijan Study AI</title>
+<style>
+:root{--navy:#102747;--teal:#167d87;--pale:#eaf7fa;--ink:#172334;--muted:#5d6b7c;--line:#dbe4ec}
+*{box-sizing:border-box}body{margin:0;background:#f3f7fb;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:22px 18px 25px;border-radius:0 0 24px 24px}
+h1{font-size:23px;margin:0 0 5px}header p{margin:0;color:#d7f5ff;font-size:13px}
+main{max-width:720px;margin:auto;padding:15px}
+.card{background:white;border:1px solid var(--line);border-radius:17px;padding:16px;margin:12px 0;box-shadow:0 3px 12px #132b4508}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:16px;margin:16px 0 6px}.muted{color:var(--muted);font-size:13px}
+label{display:block;font-weight:600;margin:12px 0 6px;font-size:14px}
+select,input,textarea{width:100%;border:1px solid #cbd7e2;border-radius:10px;padding:11px;background:white;color:var(--ink);font:inherit}
+button{border:0;border-radius:11px;padding:12px 14px;background:var(--teal);color:white;font-weight:700;font-size:14px;cursor:pointer}
+button.secondary{background:#e8f1f7;color:var(--navy)}button.full{width:100%;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tile{padding:13px;border-radius:12px;background:var(--pale);font-size:13px}.tile strong{display:block;font-size:14px;margin-bottom:4px}
+.topic{padding:12px;border-left:3px solid var(--teal);background:#f7fbfd;border-radius:8px;margin:9px 0}
+.q{padding:13px;border:1px solid var(--line);border-radius:12px;margin:10px 0}.q label{font-weight:400;margin:8px 0}
+.result{padding:12px;border-radius:10px;background:#eaf7ef;margin-top:10px;display:none}
+footer{text-align:center;padding:15px;color:var(--muted);font-size:12px}
+@media(min-width:600px){main{padding:22px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 FAIJAN STUDY AI</h1>
+  <p>Your Personal Study Companion · Class 12 Bihar Board</p>
+</header>
+<main>
+  <section class="card">
+    <h2>📚 Study Dashboard</h2>
+    <div class="grid">
+      <div class="tile"><strong>📘 Chapter Notes</strong>Basic se board level</div>
+      <div class="tile"><strong>🎯 Objective</strong>Practice questions</div>
+      <div class="tile"><strong>📝 Mock Test</strong>Apna score check karo</div>
+      <div class="tile"><strong>📅 Revision</strong>Study goals set karo</div>
+    </div>
+    <label for="subject">Subject</label>
+    <select id="subject">
+      <option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>English</option><option>Urdu</option><option>Computer Science</option>
+    </select>
+    <label for="chapter">Chapter / Topic</label>
+    <input id="chapter" placeholder="Jaise: विद्युत आवेश तथा क्षेत्र" value="विद्युत आवेश तथा क्षेत्र">
+    <label for="mode">Study Mode</label>
+    <select id="mode">
+      <option value="concept">Concept basic se samjho</option><option value="objective">Objective questions</option><option value="subjective">Subjective answers</option><option value="notes">Exam-ready notes</option><option value="revision">Revision plan</option>
+    </select>
+    <button class="full" onclick="makePlan()">Study Session Shuru Karo</button>
+    <div id="plan" class="result"></div>
+  </section>
+  <section class="card">
+    <h2>⚡ Physics: Chapter 1 Quick Notes</h2>
+    <div class="topic"><strong>1. विद्युत आवेश</strong><br>पदार्थ का वह गुण जिसके कारण विद्युत आकर्षण या प्रतिकर्षण बल लगता है, विद्युत आवेश कहलाता है।</div>
+    <div class="topic"><strong>2. आवेश के प्रकार</strong><br>धनात्मक (+) और ऋणात्मक (−)। प्रोटॉन धनात्मक, इलेक्ट्रॉन ऋणात्मक और न्यूट्रॉन उदासीन होता है।</div>
+    <div class="topic"><strong>3. आवेशों का नियम</strong><br>समान आवेश प्रतिकर्षित करते हैं; विपरीत आवेश आकर्षित करते हैं।</div>
+    <div class="topic"><strong>4. SI मात्रक</strong><br>कूलॉम (C)। इलेक्ट्रॉन का आवेश −1.6 × 10⁻¹⁹ C और प्रोटॉन का +1.6 × 10⁻¹⁹ C होता है।</div>
+    <div class="topic"><strong>5. आवेश का क्वांटीकरण</strong><br><b>q = ne</b>, जहाँ n पूर्णांक और e मूल आवेश का परिमाण है।</div>
+    <div class="topic"><strong>उदाहरण</strong><br>5 अतिरिक्त इलेक्ट्रॉनों का कुल आवेश: q = 5 × (−1.6 × 10⁻¹⁹) = <b>−8 × 10⁻¹⁹ C</b></div>
+  </section>
+  <section class="card">
+    <h2>🧪 छोटा टेस्ट</h2>
+    <p class="muted">उत्तर चुनो, फिर अपना स्कोर देखो।</p>
+    <div class="q"><strong>1. विद्युत आवेश का SI मात्रक क्या है?</strong>
+      <label><input type="radio" name="q1" value="0"> न्यूटन</label><label><input type="radio" name="q1" value="1"> कूलॉम</label><label><input type="radio" name="q1" value="0"> जूल</label>
+    </div>
+    <div class="q"><strong>2. समान आवेश एक-दूसरे पर क्या बल लगाते हैं?</strong>
+      <label><input type="radio" name="q2" value="0"> आकर्षण</label><label><input type="radio" name="q2" value="1"> प्रतिकर्षण</label><label><input type="radio" name="q2" value="0"> कोई बल नहीं</label>
+    </div>
+    <div class="q"><strong>3. इलेक्ट्रॉन का आवेश है:</strong>
+      <label><input type="radio" name="q3" value="0"> +1.6 × 10⁻¹⁹ C</label><label><input type="radio" name="q3" value="1"> −1.6 × 10⁻¹⁹ C</label><label><input type="radio" name="q3" value="0"> शून्य</label>
+    </div>
+    <button class="full" onclick="checkQuiz()">उत्तर जाँचो</button>
+    <div id="score" class="result"></div>
+  </section>
+  <section class="card">
+    <h2>🤖 AI Tutor se sawal poochho</h2>
+    <p class="muted">Yeh standalone file offline notes aur quiz chala sakti hai. AI ke jawab ke liye internet par ChatGPT kholkar apna sawal bhejo.</p>
+    <textarea id="question" rows="3" placeholder="Apna Physics / Chemistry / Maths ka sawal likho..."></textarea>
+    <button class="full" onclick="askAI()">ChatGPT mein sawal kholna</button>
+  </section>
+  <footer>Faijan Study AI · Personal study tool · Notes and quiz work offline</footer>
+</main>
+<script>
+function makePlan(){
+ const s=document.getElementById('subject').value, c=document.getElementById('chapter').value.trim()||'अपना चुना हुआ अध्याय', m=document.getElementById('mode').value;
+ const names={concept:'Concept explanation basic se shuru karo',objective:'Objective questions aur answer key practice karo',subjective:'Board-style subjective questions aur model answers padho',notes:'Definitions, formulas aur important points revise karo',revision:'Aaj ka revision plan banao'};
+ const el=document.getElementById('plan');
+ el.style.display='block';
+ el.innerHTML='<b>Session ready!</b><br>Subject: '+escapeHtml(s)+'<br>Chapter: '+escapeHtml(c)+'<br>Mode: '+names[m]+'<br><br><button onclick="sendSession()">Is session ko ChatGPT mein shuru karo</button>';
+}
+function sendSession(){
+ const s=document.getElementById('subject').value,c=document.getElementById('chapter').value.trim()||'suitable chapter choose karne mein madad karo',m=document.getElementById('mode').value;
+ const prompt='Tum mere personal AI Study Agent FAIJAN STUDY AI ho. Subject: '+s+'. Chapter: '+c+'. Mode: '+m+'. Hindi mein BSEB Class 12 board level par step by step padhाओ. Accurate concepts, examples aur practice questions do.';
+ location.href='https://chatgpt.com/?q='+encodeURIComponent(prompt);
+}
+function checkQuiz(){
+ let score=0,answered=0;
+ for(let i=1;i<=3;i++){const a=document.querySelector('input[name="q'+i+'"]:checked');if(a){answered++;score+=Number(a.value)}}
+ const el=document.getElementById('score');el.style.display='block';
+ el.innerHTML=answered<3?'Pehle teeno questions ke answer select karo.':'Tumhara score: <b>'+score+'/3</b><br>'+(score===3?'Bahut badhiya! 🎉':'Achha prayas! Notes dobara padho aur phir se try karo.');
+}
+function askAI(){const q=document.getElementById('question').value.trim();if(!q){alert('Pehle apna sawal likho.');return}location.href='https://chatgpt.com/?q='+encodeURIComponent('Mere personal study tutor ki tarah simple Hindi mein step by step samjhao: '+q)}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+</body>
+</html>
